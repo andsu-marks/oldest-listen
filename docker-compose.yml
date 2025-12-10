@@ -1,0 +1,9 @@
+services:
+  php:
+    build: .
+    image: php:8.2-apache
+    container_name: oldestlisten-php
+    ports:
+      - "8003:80"
+    volumes:
+      - ./:/var/www
