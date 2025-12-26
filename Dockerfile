@@ -7,6 +7,12 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
+
+RUN mkdir -p /var/log/php \
+    && chown -R www-data:www-data /var/log/php \
+    && chmod -R 755 /var/log/php
+
 RUN sed -i 's|/var/www/html|/var/www/public|g' /etc/apache2/sites-available/000-default.conf
 
 WORKDIR /var/www
